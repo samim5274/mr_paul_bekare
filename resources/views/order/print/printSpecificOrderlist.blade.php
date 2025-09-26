@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: 80mm auto; /* 80mm width, height auto */
+            margin: 0;       /* remove default margins */
+        }
+
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            width: 80mm;
+        }
+
+        .invoice {
+            padding: 5px;
+        }
+
+        h2, h4, p {
+            margin: 2px 0;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        table th, table td {
+            border: 1px dashed #000;
+            padding: 4px;
+            text-align: left;
+        }
+
+        table th {
+            background: #f2f2f2;
+        }
+
+        .totals td {
+            font-weight: bold;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 10px;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="invoice-header">
+        <h2>{{ $company[0]->name }}</h2>
+        <p>{{ $company[0]->address }}</p>
+        <p>{{ $company[0]->email }} || {{ $company[0]->phone }}</p>
+        <p><strong>Order Invoice</strong></p>
+    </div>
+
+    <div class="invoice-subheader">
+        <p><strong>Billing:</strong> {{ $cart[0]->user->name }}||<strong>C.Name:</strong> {{ $order->customerName }}||<strong>C.Phone:</strong> {{ $order->customerPhone }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>P.Name</th>
+                <th>Qty</th>
+                <th>৳/Item</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($cart as $key => $val)
+            <tr>
+                <td>{{ $key + 1 }}</td>
+                <td>{{ $val->product->name }}</td>
+                <td>{{ $val->quantity }}</td>
+                <td>{{ number_format($val->price, 2) }}</td>
+                <td>{{ number_format($val->price * $val->quantity, 2) }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <table class="totals">
+        <tr>
+            <td>Subtotal:</td>
+            <td>৳{{ number_format($order->total, 2) }}</td>
+        </tr>
+        <tr>
+            <td>Discount:</td>
+            <td>৳{{ number_format($order->discount, 2) }}</td>
+        </tr>
+        <tr>
+            <td>VAT:</td>
+            <td>৳{{ number_format($order->vat, 2) }}</td>
+        </tr>
+        <tr>
+            <td>Payable:</td>
+            <td><strong>৳{{ number_format($order->payable, 2) }}</strong></td>
+        </tr>
+        <tr>
+            <td>Paid:</td>
+            <td>৳{{ number_format($order->pay, 2) }}</td>
+        </tr>
+        <tr>
+            <td>Due:</td>
+            <td>৳{{ number_format($order->due, 2) }}</td>
+        </tr>
+    </table>
+
+
+    <p class="note">Developed by SAMIM-HosseN | Call: +8801624209291</p>
+    <!-- auto print -->
+    <script>
+        window.onload = function() {
+            window.print();
+            setTimeout(() => {
+                window.close();
+            }, 300);
+        };
+    </script>
+
+</body>
+</html>
