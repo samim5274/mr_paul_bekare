@@ -69,4 +69,14 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(DueCollection::class);
     }
+
+    public function factory()
+    {
+        return $this->belongsTo(FactoryStock::class);
+    }
+
+    public function purchaseReturn()
+    {
+        return $this->hasMany(PurchaseReturn::class, 'user_id', 'id');
+    }
 }

@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\purchaseReturn;
+use App\Models\PaymentMethod;
 use Auth;
 
 class PurchaseController extends Controller
@@ -163,7 +164,4 @@ class PurchaseController extends Controller
         return view('purchase.print.printPurchaseOrder', compact('cart','reg','company'));
     }
 
-    public function purchaseReturn(){
-        return view('purchase.purchaseReturnList');
-    }
 }

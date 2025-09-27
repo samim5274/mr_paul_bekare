@@ -100,7 +100,7 @@
         <p>{{ $company[0]->address }}</p>
         <p>Email: {{ $company[0]->email }} | Phone: {{ $company[0]->phone }} | Website: {{ $company[0]->website }}</p>
         <h3>Daily Total Transection Reports</h3>
-        <p style="text-align:center; font-size:13px; color:#555;">Date : {{ $reportDate }}</p>
+        <p style="text-align:center; font-size:13px; color:#555;">Date : {{ $date }}</p>
         <hr>
         <!-- <div class="qrImg">
             {!! QrCode::size(70)->generate('Abir Bekare & Foods') !!}
@@ -128,12 +128,16 @@
                     <td>৳{{ number_format($due, 2) }}/-</td>
                 </tr>
                 <tr>
+                    <td>Due Collection</td>
+                    <td>৳{{ number_format($dueCollecion, 2) }}/-</td>
+                </tr>
+                <tr>
                     <td>Expenses</td>
                     <td>৳{{ number_format($expenses, 2) }}/-</td>
                 </tr>
                 <tr class="closing-balance">
                     <td>Closing Balance</td>
-                    <td>৳{{ number_format($pay - $expenses, 2) }}/-</td>
+                    <td>৳{{ number_format(($dueCollecion + $pay) - $expenses, 2) }}/-</td>
                 </tr>
             </tbody>
         </table>

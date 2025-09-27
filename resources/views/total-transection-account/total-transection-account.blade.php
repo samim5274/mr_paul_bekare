@@ -46,12 +46,20 @@
                 <!-- Page Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3 class="fw-bold text-dark m-0">
-                        <i class="fa-solid fa-chart-line text-primary"></i> Transaction Details Report
+                        <i class="fa-solid fa-chart-line text-primary"></i>
+                        Transaction Details Report
                     </h3>
-                    <a href="{{url('/print-closing-balance')}}" class="btn btn-outline-primary btn-sm" target="_blank">
-                        <i class="fa-solid fa-print"></i> Print Report
-                    </a>
+
+                    <div class="d-flex gap-2">
+                        <a href="/send-email" class="btn btn-outline-primary">
+                            <i class="fa-regular fa-envelope"></i> Send Email
+                        </a>
+                        <a href="{{ url('/print-closing-balance') }}" class="btn btn-outline-primary btn-sm" target="_blank">
+                            <i class="fa-solid fa-print"></i> Print Report
+                        </a>
+                    </div>
                 </div>
+
 
                 <!-- Summary Cards -->
                 <div class="row g-3 mb-4">
@@ -111,50 +119,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm rounded-3">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Due Collection</h6>
+                                <h4 class="fw-bold text-warning">৳{{$dueCollecion}}/-</h4>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="card border-0 shadow-sm rounded-3">
                             <div class="card-body text-center">
                                 <h6 class="text-muted mb-1">Balance</h6>
-                                <h4 class="fw-bold text-success">৳{{$pay - $expenses}}/-</h4>
+                                <h4 class="fw-bold text-success display-4">৳{{($dueCollecion + $pay) - $expenses}}/- <span class="text-sm text-muted">Only</span></h4>                                
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="table-responsive mb-4">
-                    <table class="table table-bordered  align-middle">                        
-                        <tbody>
-                            <tr class="fw-bold">
-                                <td class="">Total Amount</td>
-                                <td class="text-end">৳{{$total}}/-</td>
-                            </tr>
-                            <tr class="fw-bold">
-                                <td class="">VAT</td>
-                                <td class="text-end">৳{{$vat}}/-</td>
-                            </tr>
-                            <tr class="fw-bold">
-                                <td class="">Payable</td>
-                                <td class="text-end">৳{{$payable}}/-</td>
-                            </tr>
-                            <tr class="fw-bold">
-                                <td class="">Pay</td>
-                                <td class="text-end">৳{{$pay}}/-</td>
-                            </tr>                            
-                            <tr class="fw-bold">
-                                <td class="">Due</td>
-                                <td class="text-end">৳{{$due}}/-</td>
-                            </tr>
-                            <tr class="fw-bold">
-                                <td class="">Expenses</td>
-                                <td class="text-end">৳{{$expenses}}/-</td>
-                            </tr>
-                            <tr class="fw-bold">
-                                <td class="text-center">Closeing Balance</td>
-                                <td class="text-end">৳{{ $pay - $expenses }}/-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
 
             </div>
         </div>

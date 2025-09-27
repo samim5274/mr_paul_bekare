@@ -40,8 +40,7 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Home</li>
+                                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
                             </ul>
                         </div>
                     </div>

@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\FactoryStock;
 use Auth;
 
 class FactoryController extends Controller
@@ -236,5 +237,112 @@ class FactoryController extends Controller
         $stock->save();
         // dd($product, $purchasecart,$stock);
         return redirect()->back()->with('success','Stock received successfully.');
+    }
+
+    public function factoryReturn(){
+        $products = Product::paginate(20);
+        return view('factory.factory-product-return', compact('products'));
+    }
+
+    public function serchFactoryReturn(Request $request){
+        $output = "";
+        $product = Product::where('name', 'like', '%'.$request->search.'%')
+                            ->orWhere('id', 'like', '%'.$request->search.'%')
+                            ->orWhere('sku', 'like', '%'.$request->search.'%')
+                            ->get();
+
+        foreach($product as $key => $val){
+
+            $editProduct = url('/edit-product/'.$val->id);
+            $updateStock = url('/factory-return-qty/'.$val->id);
+            $name = strlen($val->name) > 22 ? substr($val->name, 0, 22).'...' : $val->name;
+
+            $output .= '
+                <tr>
+                    <td class="text-center">'.($key+1).'</td>
+                    <td>
+                        <a href="'.$editProduct.'" class="fw-semibold text-decoration-none text-primary">'.$name.'</a>
+                    </td>
+                    <td class="text-center">'.$val->price.'</td>
+                    <td class="text-center">'.$val->stock.'</td>
+                    <td class="text-center">
+                        <form action="'.$updateStock.'" method="POST" class="d-flex justify-content-center align-items-center gap-2">
+                            <input type="hidden" name="_token" value="'.csrf_token().'">
+                            <input type="number" name="stock" value="'.$val->stock.'" min="0"
+                                class="form-control form-control-sm text-center" style="max-width: 100px;">
+                            <input type="text" name="reason" value="N/A" required class="form-control form-control-sm text-center" style="max-width: 100px;">
+                            <button type="submit" class="btn btn-sm btn-success">Save</button>
+                        </form>
+                    </td>
+                </tr>
+            ';
+        }
+
+        return response($output);
+    }
+
+    public function factoryReturnQty(Request $request, $productId){
+        $date = Carbon::today()->format('Y-m-d');
+        $stockQty = $request->input('stock', '');
+        $reason = $request->input('reason', '');
+
+        $product = Product::where('id', $productId)->first(); 
+        if(empty($product)){
+            return redirect()->back()->with('warning', 'Product not found. Please try another product. Thank You!');
+        }
+
+        if ($product->stock < $stockQty) {
+            return redirect()->back()->with('warning', 'Not enough stock available. Current stock: ' . $product->stock);
+        }
+
+        $findProduct = FactoryStock::where('return_date', $date)->where('product_id', $productId)->first();
+        if($findProduct){
+            $findProduct->user_id = Auth::guard('admin')->user()->id;           
+            $findProduct->product_id = $product->id;
+            $findProduct->quantity += $stockQty;
+            $findProduct->price = (float) $product->price * (int)$findProduct->quantity;
+            $findProduct->reason = $reason;
+            $findProduct->return_date = $date;
+            $findProduct->status = 1; // 1 stock in, 2 stock out
+            
+            $product->stock -= $stockQty;
+            
+            $stock = new Stock();
+            $stock->reg = 0;
+            $stock->date = $date;
+            $stock->product_id = $product->id;
+            $stock->stockOut = $stockQty;
+            $stock->status = 4; // 1 sale, 2 return, 3 stock in and 4 stock out
+            $stock->remark = 'factory Return';
+            
+            $findProduct->save();
+            $product->update();
+            $stock->save();
+            return redirect()->back()->with('success', $product->name .' factory returned successfully.');
+        } else {
+            $data = new FactoryStock();
+            $data->user_id = Auth::guard('admin')->user()->id;           
+            $data->product_id = $product->id;
+            $data->quantity = $stockQty;
+            $data->price = (float) $product->price * (int)$stockQty;
+            $data->reason = $reason;
+            $data->return_date = $date;
+            $data->status = 1; // 1 stock in, 2 stock out
+            
+            $product->stock -= $stockQty;
+            
+            $stock = new Stock();
+            $stock->reg = 0;
+            $stock->date = $date;
+            $stock->product_id = $product->id;
+            $stock->stockOut = $stockQty;
+            $stock->status = 4; // 1 sale, 2 return, 3 stock in and 4 stock out
+            $stock->remark = 'factory Return';
+            
+            $data->save();
+            $product->update();
+            $stock->save();
+            return redirect()->back()->with('success', $product->name .' factory returned successfully.');
+        }
     }
 }

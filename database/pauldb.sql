@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 26, 2025 at 02:43 PM
+-- Generation Time: Sep 27, 2025 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -115,7 +115,14 @@ INSERT INTO `carts` (`id`, `reg`, `date`, `user_id`, `product_id`, `branch_id`, 
 (5, 20250926010001, '2025-09-26', 1, 6, 1, 1, 160.00, '2025-09-26 11:45:22', '2025-09-26 11:45:22'),
 (6, 20250926010002, '2025-09-26', 1, 6, 1, 1, 160.00, '2025-09-26 11:48:44', '2025-09-26 11:48:44'),
 (7, 20250926010002, '2025-09-26', 1, 3, 1, 1, 40.00, '2025-09-26 11:48:44', '2025-09-26 11:48:44'),
-(8, 20250926010002, '2025-09-26', 1, 5, 1, 1, 80.00, '2025-09-26 11:48:45', '2025-09-26 11:48:45');
+(8, 20250926010002, '2025-09-26', 1, 5, 1, 1, 80.00, '2025-09-26 11:48:45', '2025-09-26 11:48:45'),
+(9, 20250927010003, '2025-09-27', 1, 6, 1, 1, 160.00, '2025-09-27 08:45:46', '2025-09-27 08:45:46'),
+(10, 20250927010003, '2025-09-27', 1, 11, 1, 1, 140.00, '2025-09-27 08:45:47', '2025-09-27 08:45:47'),
+(11, 20250927010003, '2025-09-27', 1, 10, 1, 1, 120.00, '2025-09-27 08:45:48', '2025-09-27 08:45:48'),
+(12, 20250927010003, '2025-09-27', 1, 9, 1, 1, 200.00, '2025-09-27 08:45:48', '2025-09-27 08:45:48'),
+(13, 20250927010004, '2025-09-27', 1, 5, 1, 1, 80.00, '2025-09-27 08:46:57', '2025-09-27 08:46:57'),
+(14, 20250927010004, '2025-09-27', 1, 6, 1, 1, 160.00, '2025-09-27 08:46:57', '2025-09-27 08:46:57'),
+(15, 20250927010004, '2025-09-27', 1, 7, 1, 1, 100.00, '2025-09-27 08:46:58', '2025-09-27 08:46:58');
 
 -- --------------------------------------------------------
 
@@ -190,7 +197,8 @@ CREATE TABLE `due_collections` (
 --
 
 INSERT INTO `due_collections` (`id`, `order_id`, `reg`, `due`, `pay`, `payment_date`, `user_id`, `note`, `created_at`, `updated_at`) VALUES
-(1, 2, 20250926010002, 0.00, 172.00, '2025-09-26', 1, 'N/A', '2025-09-26 12:33:45', '2025-09-26 12:33:45');
+(1, 2, 20250926010002, 0.00, 172.00, '2025-09-26', 1, 'N/A', '2025-09-26 12:33:45', '2025-09-26 12:33:45'),
+(2, 3, 20250927010003, 0.00, 150.00, '2025-09-27', 1, 'N/A', '2025-09-27 08:46:26', '2025-09-27 08:46:26');
 
 -- --------------------------------------------------------
 
@@ -240,7 +248,8 @@ CREATE TABLE `expenses` (
 
 INSERT INTO `expenses` (`id`, `catId`, `subcatId`, `userId`, `date`, `amount`, `remark`, `created_at`, `updated_at`) VALUES
 (1, 2, 4, 1, '2025-09-26', 450.00, 'N/A', '2025-09-26 11:55:25', '2025-09-26 11:55:25'),
-(2, 1, 1, 1, '2025-09-26', 100.00, 'N/A', '2025-09-26 12:12:09', '2025-09-26 12:12:09');
+(2, 1, 1, 1, '2025-09-26', 100.00, 'N/A', '2025-09-26 12:12:09', '2025-09-26 12:12:09'),
+(3, 3, 6, 1, '2025-09-27', 500.00, 'N/A', '2025-09-27 08:46:42', '2025-09-27 08:46:42');
 
 -- --------------------------------------------------------
 
@@ -267,7 +276,11 @@ INSERT INTO `expired_products` (`id`, `product_id`, `name`, `price`, `quantity`,
 (2, 1, 'Burger Bun', 40.00, 6, '2025-09-26', '2025-09-26 11:07:41', '2025-09-26 11:07:41'),
 (3, 1, 'Burger Bun', 40.00, 5, '2025-09-26', '2025-09-26 11:07:58', '2025-09-26 11:07:58'),
 (4, 1, 'Burger Bun', 40.00, 5, '2025-09-26', '2025-09-26 11:08:52', '2025-09-26 11:08:52'),
-(5, 2, 'Tiffin Bun', 50.00, 3, '2025-09-26', '2025-09-26 11:33:09', '2025-09-26 11:33:09');
+(5, 2, 'Tiffin Bun', 50.00, 3, '2025-09-26', '2025-09-26 11:33:09', '2025-09-26 11:33:09'),
+(6, 21, 'Shwarma Roll', 120.00, 18, '2025-09-27', '2025-09-27 06:13:29', '2025-09-27 06:13:29'),
+(7, 1, 'Burger Bun', 160.00, 4, '2025-09-27', '2025-09-27 09:05:28', '2025-09-27 09:05:28'),
+(8, 3, 'Butter Bun', 200.00, 5, '2025-09-27', '2025-09-27 09:24:47', '2025-09-27 09:24:47'),
+(9, 3, 'Butter Bun', 80.00, 2, '2025-09-27', '2025-09-27 09:24:57', '2025-09-27 09:24:57');
 
 -- --------------------------------------------------------
 
@@ -298,6 +311,33 @@ INSERT INTO `exsubcategories` (`id`, `cat_id`, `name`, `created_at`, `updated_at
 (8, 4, 'Water', '2025-09-26 09:43:09', '2025-09-26 09:43:09'),
 (9, 5, 'Medicine', '2025-09-26 09:43:09', '2025-09-26 09:43:09'),
 (10, 5, 'Doctor', '2025-09-26 09:43:09', '2025-09-26 09:43:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `factory_stocks`
+--
+
+CREATE TABLE `factory_stocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `reason` text DEFAULT NULL,
+  `return_date` date NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `factory_stocks`
+--
+
+INSERT INTO `factory_stocks` (`id`, `user_id`, `product_id`, `quantity`, `price`, `reason`, `return_date`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 3, 120.00, 'N/A', '2025-09-27', 1, '2025-09-27 07:38:43', '2025-09-27 07:44:39'),
+(2, 1, 2, 1, 50.00, 'N/A', '2025-09-27', 1, '2025-09-27 07:38:51', '2025-09-27 07:38:51');
 
 -- --------------------------------------------------------
 
@@ -353,7 +393,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2025_07_20_105407_create_expenses_table', 1),
 (20, '2025_08_09_101821_create_companies_table', 1),
 (21, '2025_09_23_115550_create_due_collections_table', 1),
-(22, '2025_09_23_153947_create_expired_products_table', 1);
+(22, '2025_09_23_153947_create_expired_products_table', 1),
+(25, '2025_09_27_123207_create_factory_stocks_table', 2);
 
 -- --------------------------------------------------------
 
@@ -387,7 +428,9 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `date`, `user_id`, `branch_id`, `reg`, `total`, `discount`, `vat`, `payable`, `pay`, `due`, `paymentMethod`, `status`, `customerName`, `customerPhone`, `created_at`, `updated_at`) VALUES
 (1, '2025-09-26', 1, 1, 20250926010001, 290.00, 50.00, 43.50, 283.50, 283.50, 0.00, 1, 2, '0', 0, '2025-09-26 11:45:30', '2025-09-26 11:45:30'),
-(2, '2025-09-26', 1, 1, 20250926010002, 280.00, 50.00, 42.00, 272.00, 100.00, 0.00, 1, 2, 'shamim', 1762164746, '2025-09-26 11:48:57', '2025-09-26 12:33:45');
+(2, '2025-09-26', 1, 1, 20250926010002, 280.00, 50.00, 42.00, 272.00, 100.00, 0.00, 1, 2, 'shamim', 1762164746, '2025-09-26 11:48:57', '2025-09-26 12:33:45'),
+(3, '2025-09-27', 1, 1, 20250927010003, 620.00, 63.00, 93.00, 650.00, 500.00, 0.00, 1, 2, 'Samim', 1762164746, '2025-09-27 08:46:06', '2025-09-27 08:46:26'),
+(4, '2025-09-27', 1, 1, 20250927010004, 340.00, 41.00, 51.00, 350.00, 0.00, 350.00, 1, 3, 'Samim', 1762164746, '2025-09-27 08:47:15', '2025-09-27 08:47:15');
 
 -- --------------------------------------------------------
 
@@ -488,17 +531,17 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `price`, `stock`, `description`, `image`, `availability`, `size`, `ingredients`, `manufactured`, `expired`, `sku`, `created_at`, `updated_at`) VALUES
-(1, 'Burger Bun', 1, 1, 40.00, 9, NULL, NULL, 1, '75gm (2pcs)', NULL, '2025-09-20', '2025-11-28', 'PRD001', '2025-09-26 09:42:28', '2025-09-26 11:45:21'),
-(2, 'Tiffin Bun', 1, 2, 50.00, 30, NULL, NULL, 1, '105gm (4pcs)', NULL, '2025-09-19', '2025-11-06', 'PRD002', '2025-09-26 09:42:28', '2025-09-26 11:45:22'),
-(3, 'Butter Bun', 1, 2, 40.00, 28, NULL, NULL, 1, '100gm', NULL, '2025-09-23', '2026-07-04', 'PRD003', '2025-09-26 09:42:28', '2025-09-26 11:48:44'),
-(4, 'Family Bun', 1, 2, 90.00, 19, NULL, NULL, 1, '220gm', NULL, '2025-09-24', '2026-03-25', 'PRD004', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(5, 'Sandwich Bread', 1, 3, 80.00, 17, NULL, NULL, 1, '400gm', NULL, '2025-09-24', '2026-05-22', 'PRD005', '2025-09-26 09:42:28', '2025-09-26 11:48:45'),
-(6, 'Sandwich Bread', 1, 3, 160.00, 37, NULL, NULL, 1, '800gm', NULL, '2025-09-25', '2026-04-20', 'PRD006', '2025-09-26 09:42:28', '2025-09-26 11:48:44'),
-(7, 'Milk Bread', 1, 3, 100.00, 38, NULL, NULL, 1, '400gm', NULL, '2025-09-23', '2026-03-05', 'PRD007', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
+(1, 'Burger Bun', 1, 1, 40.00, 20, NULL, NULL, 1, '75gm (2pcs)', NULL, '2025-09-20', '2025-11-28', 'PRD001', '2025-09-26 09:42:28', '2025-09-27 09:05:28'),
+(2, 'Tiffin Bun', 1, 2, 50.00, 28, NULL, NULL, 1, '105gm (4pcs)', NULL, '2025-09-19', '2025-11-06', 'PRD002', '2025-09-26 09:42:28', '2025-09-27 07:38:51'),
+(3, 'Butter Bun', 1, 2, 40.00, 48, NULL, NULL, 1, '100gm', NULL, '2025-09-23', '2026-07-04', 'PRD003', '2025-09-26 09:42:28', '2025-09-27 09:24:57'),
+(4, 'Family Bun', 1, 2, 90.00, 54, NULL, NULL, 1, '220gm', NULL, '2025-09-24', '2026-03-25', 'PRD004', '2025-09-26 09:42:28', '2025-09-27 07:26:43'),
+(5, 'Sandwich Bread', 1, 3, 80.00, 16, NULL, NULL, 1, '400gm', NULL, '2025-09-24', '2026-05-22', 'PRD005', '2025-09-26 09:42:28', '2025-09-27 08:46:57'),
+(6, 'Sandwich Bread', 1, 3, 160.00, 35, NULL, NULL, 1, '800gm', NULL, '2025-09-25', '2026-04-20', 'PRD006', '2025-09-26 09:42:28', '2025-09-27 08:46:57'),
+(7, 'Milk Bread', 1, 3, 100.00, 37, NULL, NULL, 1, '400gm', NULL, '2025-09-23', '2026-03-05', 'PRD007', '2025-09-26 09:42:28', '2025-09-27 08:46:58'),
 (8, 'Raisins Sesame Roll', 1, 4, 90.00, 35, NULL, NULL, 1, 'N/A', NULL, '2025-09-21', '2026-07-28', 'PRD008', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(9, 'Sandwich Bread', 1, 5, 200.00, 7, NULL, NULL, 1, '1000gm', NULL, '2025-09-21', '2026-06-17', 'PRD009', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(10, 'Chicken Cheese Burger', 2, 6, 120.00, 27, NULL, NULL, 1, 'N/A', NULL, '2025-09-19', '2026-06-01', 'PRD010', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(11, 'Chicken Crispy Burger', 2, 6, 140.00, 38, NULL, NULL, 1, 'N/A', NULL, '2025-09-25', '2026-09-15', 'PRD011', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
+(9, 'Sandwich Bread', 1, 5, 200.00, 56, NULL, NULL, 1, '1000gm', NULL, '2025-09-21', '2026-06-17', 'PRD009', '2025-09-26 09:42:28', '2025-09-27 08:45:48'),
+(10, 'Chicken Cheese Burger', 2, 6, 120.00, 26, NULL, NULL, 1, 'N/A', NULL, '2025-09-19', '2026-06-01', 'PRD010', '2025-09-26 09:42:28', '2025-09-27 08:45:48'),
+(11, 'Chicken Crispy Burger', 2, 6, 140.00, 37, NULL, NULL, 1, 'N/A', NULL, '2025-09-25', '2026-09-15', 'PRD011', '2025-09-26 09:42:28', '2025-09-27 08:45:47'),
 (12, 'Chicken Mexican Burger', 2, 6, 140.00, 28, NULL, NULL, 1, 'N/A', NULL, '2025-09-20', '2025-12-14', 'PRD012', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
 (13, 'Chicken Sub Burger', 2, 6, 130.00, 18, NULL, NULL, 1, 'N/A', NULL, '2025-09-19', '2026-01-16', 'PRD013', '2025-09-26 09:42:28', '2025-09-26 10:06:21'),
 (14, 'Chicken Baby Burger', 2, 6, 50.00, 14, NULL, NULL, 1, 'N/A', NULL, '2025-09-24', '2026-04-10', 'PRD014', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
@@ -508,8 +551,8 @@ INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `price`, 
 (18, 'Chicken Patties', 2, 10, 80.00, 49, NULL, NULL, 1, 'N/A', NULL, '2025-09-19', '2026-08-24', 'PRD018', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
 (19, 'Vegetable Patties', 2, 10, 50.00, 43, NULL, NULL, 1, 'N/A', NULL, '2025-09-21', '2026-01-03', 'PRD019', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
 (20, 'Vegetable Roll', 2, 7, 40.00, 32, NULL, NULL, 1, 'N/A', NULL, '2025-09-24', '2026-07-24', 'PRD020', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(21, 'Shwarma Roll', 2, 7, 120.00, 18, NULL, NULL, 1, 'N/A', NULL, '2025-09-25', '2026-09-05', 'PRD021', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
-(22, 'Meduim Pizza', 2, 9, 150.00, 5, NULL, NULL, 1, 'N/A', NULL, '2025-09-22', '2026-01-13', 'PRD022', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
+(21, 'Shwarma Roll', 2, 7, 120.00, 50, NULL, NULL, 1, 'N/A', NULL, '2025-09-25', '2026-09-05', 'PRD021', '2025-09-26 09:42:28', '2025-09-27 07:26:49'),
+(22, 'Meduim Pizza', 2, 9, 150.00, 55, NULL, NULL, 1, 'N/A', NULL, '2025-09-22', '2026-01-13', 'PRD022', '2025-09-26 09:42:28', '2025-09-27 07:26:52'),
 (23, 'Chicken Sandwich', 2, 8, 100.00, 7, NULL, NULL, 1, 'N/A', NULL, '2025-09-20', '2026-02-07', 'PRD023', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
 (24, 'Club Sandwich', 2, 8, 120.00, 22, NULL, NULL, 1, 'N/A', NULL, '2025-09-20', '2026-05-02', 'PRD024', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
 (25, 'Grill Sandwich', 2, 8, 100.00, 29, NULL, NULL, 1, 'N/A', NULL, '2025-09-20', '2026-03-09', 'PRD025', '2025-09-26 09:42:28', '2025-09-26 09:42:28'),
@@ -622,7 +665,49 @@ INSERT INTO `stocks` (`id`, `reg`, `date`, `product_id`, `stockIn`, `stockOut`, 
 (9, 20250926010001, '2025-09-26', 6, 0, 1, 'Out', 1, '2025-09-26 11:45:22', '2025-09-26 11:45:22'),
 (10, 20250926010002, '2025-09-26', 6, 0, 1, 'Out', 1, '2025-09-26 11:48:44', '2025-09-26 11:48:44'),
 (11, 20250926010002, '2025-09-26', 3, 0, 1, 'Out', 1, '2025-09-26 11:48:44', '2025-09-26 11:48:44'),
-(12, 20250926010002, '2025-09-26', 5, 0, 1, 'Out', 1, '2025-09-26 11:48:45', '2025-09-26 11:48:45');
+(12, 20250926010002, '2025-09-26', 5, 0, 1, 'Out', 1, '2025-09-26 11:48:45', '2025-09-26 11:48:45'),
+(13, 0, '2025-09-27', 21, 0, 18, 'Waste', 1, '2025-09-27 06:13:29', '2025-09-27 06:13:29'),
+(14, 0, '2025-09-27', 21, 10, 0, 'In from factory', 2, '2025-09-27 06:13:46', '2025-09-27 06:13:46'),
+(15, 0, '2025-09-27', 1, 0, 1, 'factory Return', 4, '2025-09-27 06:47:52', '2025-09-27 06:47:52'),
+(16, 0, '2025-09-27', 2, 0, 10, 'factory Return', 4, '2025-09-27 06:48:42', '2025-09-27 06:48:42'),
+(17, 0, '2025-09-27', 2, 0, 15, 'factory Return', 4, '2025-09-27 06:55:41', '2025-09-27 06:55:41'),
+(18, 0, '2025-09-27', 3, 0, 8, 'factory Return', 4, '2025-09-27 06:55:46', '2025-09-27 06:55:46'),
+(19, 0, '2025-09-27', 3, 0, 15, 'factory Return', 4, '2025-09-27 06:56:20', '2025-09-27 06:56:20'),
+(20, 0, '2025-09-27', 4, 0, 15, 'factory Return', 4, '2025-09-27 06:56:39', '2025-09-27 06:56:39'),
+(21, 0, '2025-09-27', 1, 0, 1, 'factory Return', 4, '2025-09-27 07:18:06', '2025-09-27 07:18:06'),
+(22, 0, '2025-09-27', 1, 0, 1, 'factory Return', 4, '2025-09-27 07:26:07', '2025-09-27 07:26:07'),
+(23, 0, '2025-09-27', 1, 50, 0, 'In from factory', 2, '2025-09-27 07:26:31', '2025-09-27 07:26:31'),
+(24, 0, '2025-09-27', 2, 50, 0, 'In from factory', 2, '2025-09-27 07:26:36', '2025-09-27 07:26:36'),
+(25, 0, '2025-09-27', 3, 50, 0, 'In from factory', 2, '2025-09-27 07:26:39', '2025-09-27 07:26:39'),
+(26, 0, '2025-09-27', 4, 50, 0, 'In from factory', 2, '2025-09-27 07:26:43', '2025-09-27 07:26:43'),
+(27, 0, '2025-09-27', 9, 50, 0, 'In from factory', 2, '2025-09-27 07:26:46', '2025-09-27 07:26:46'),
+(28, 0, '2025-09-27', 21, 40, 0, 'In from factory', 2, '2025-09-27 07:26:49', '2025-09-27 07:26:49'),
+(29, 0, '2025-09-27', 22, 50, 0, 'In from factory', 2, '2025-09-27 07:26:52', '2025-09-27 07:26:52'),
+(30, 0, '2025-09-27', 1, 0, 6, 'factory Return', 4, '2025-09-27 07:27:00', '2025-09-27 07:27:00'),
+(31, 0, '2025-09-27', 1, 0, 10, 'factory Return', 4, '2025-09-27 07:27:04', '2025-09-27 07:27:04'),
+(32, 0, '2025-09-27', 2, 0, 5, 'factory Return', 4, '2025-09-27 07:27:07', '2025-09-27 07:27:07'),
+(33, 0, '2025-09-27', 2, 0, 5, 'factory Return', 4, '2025-09-27 07:27:09', '2025-09-27 07:27:09'),
+(34, 0, '2025-09-27', 2, 0, 5, 'factory Return', 4, '2025-09-27 07:27:21', '2025-09-27 07:27:21'),
+(35, 0, '2025-09-27', 1, 0, 5, 'factory Return', 4, '2025-09-27 07:28:39', '2025-09-27 07:28:39'),
+(36, 0, '2025-09-27', 2, 0, 5, 'factory Return', 4, '2025-09-27 07:28:42', '2025-09-27 07:28:42'),
+(37, 0, '2025-09-27', 2, 0, 5, 'factory Return', 4, '2025-09-27 07:29:53', '2025-09-27 07:29:53'),
+(38, 0, '2025-09-27', 1, 0, 5, 'factory Return', 4, '2025-09-27 07:29:55', '2025-09-27 07:29:55'),
+(39, 0, '2025-09-27', 1, 0, 2, 'factory Return', 4, '2025-09-27 07:30:56', '2025-09-27 07:30:56'),
+(40, 0, '2025-09-27', 1, 0, 1, 'factory Return', 4, '2025-09-27 07:31:17', '2025-09-27 07:31:17'),
+(41, 0, '2025-09-27', 2, 0, 1, 'factory Return', 4, '2025-09-27 07:33:33', '2025-09-27 07:33:33'),
+(42, 0, '2025-09-27', 1, 0, 2, 'factory Return', 4, '2025-09-27 07:38:43', '2025-09-27 07:38:43'),
+(43, 0, '2025-09-27', 2, 0, 1, 'factory Return', 4, '2025-09-27 07:38:51', '2025-09-27 07:38:51'),
+(44, 0, '2025-09-27', 1, 0, 1, 'factory Return', 4, '2025-09-27 07:44:39', '2025-09-27 07:44:39'),
+(45, 20250927010003, '2025-09-27', 6, 0, 1, 'Out', 1, '2025-09-27 08:45:46', '2025-09-27 08:45:46'),
+(46, 20250927010003, '2025-09-27', 11, 0, 1, 'Out', 1, '2025-09-27 08:45:47', '2025-09-27 08:45:47'),
+(47, 20250927010003, '2025-09-27', 10, 0, 1, 'Out', 1, '2025-09-27 08:45:48', '2025-09-27 08:45:48'),
+(48, 20250927010003, '2025-09-27', 9, 0, 1, 'Out', 1, '2025-09-27 08:45:48', '2025-09-27 08:45:48'),
+(49, 20250927010004, '2025-09-27', 5, 0, 1, 'Out', 1, '2025-09-27 08:46:57', '2025-09-27 08:46:57'),
+(50, 20250927010004, '2025-09-27', 6, 0, 1, 'Out', 1, '2025-09-27 08:46:57', '2025-09-27 08:46:57'),
+(51, 20250927010004, '2025-09-27', 7, 0, 1, 'Out', 1, '2025-09-27 08:46:58', '2025-09-27 08:46:58'),
+(52, 0, '2025-09-27', 1, 0, 4, 'Waste', 4, '2025-09-27 09:05:28', '2025-09-27 09:05:28'),
+(53, 0, '2025-09-27', 3, 0, 5, 'Waste', 4, '2025-09-27 09:24:47', '2025-09-27 09:24:47'),
+(54, 0, '2025-09-27', 3, 0, 2, 'Waste', 4, '2025-09-27 09:24:57', '2025-09-27 09:24:57');
 
 -- --------------------------------------------------------
 
@@ -768,6 +853,14 @@ ALTER TABLE `exsubcategories`
   ADD KEY `exsubcategories_cat_id_foreign` (`cat_id`);
 
 --
+-- Indexes for table `factory_stocks`
+--
+ALTER TABLE `factory_stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `factory_stocks_product_id_foreign` (`product_id`),
+  ADD KEY `factory_stocks_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -880,7 +973,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -898,7 +991,7 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `due_collections`
 --
 ALTER TABLE `due_collections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `excategories`
@@ -910,19 +1003,25 @@ ALTER TABLE `excategories`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `expired_products`
 --
 ALTER TABLE `expired_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `exsubcategories`
 --
 ALTER TABLE `exsubcategories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `factory_stocks`
+--
+ALTER TABLE `factory_stocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -934,13 +1033,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
@@ -976,7 +1075,7 @@ ALTER TABLE `purchaseorders`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -1028,6 +1127,13 @@ ALTER TABLE `expired_products`
 --
 ALTER TABLE `exsubcategories`
   ADD CONSTRAINT `exsubcategories_cat_id_foreign` FOREIGN KEY (`cat_id`) REFERENCES `excategories` (`id`);
+
+--
+-- Constraints for table `factory_stocks`
+--
+ALTER TABLE `factory_stocks`
+  ADD CONSTRAINT `factory_stocks_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `factory_stocks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
 
 --
 -- Constraints for table `orders`

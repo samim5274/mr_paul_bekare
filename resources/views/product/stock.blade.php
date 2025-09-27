@@ -94,7 +94,11 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <h4 class="mb-3">Bakery Product List</h4>
-
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card mt-2">
+                        <input type="search" name="search" id="search" class="form-control" placeholder="Search by food name or Id or scan product ber code . . .">
+                    </div>
+                </div> 
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped ">
                         <thead class="table-dark">
@@ -110,18 +114,24 @@
                                 <th class="text-center" colspan="2">Availability</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="resultData" id="content" style="display:none;"></tbody>
+
+                        <tbody class="allData">
                             @foreach($product as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
                                     @if($val->image)
-                                        <a href="{{url('/edit-product/'.$val->id)}}"><img src="{{ asset('img/food/' . $val->image) }}" alt="Product Image" style="height: 60px; border-radius: 6px;"></a>
+                                        <a href="{{ url('/edit-product/'.$val->id) }}">
+                                            <img src="{{ asset('img/food/' . $val->image) }}" alt="Product Image" style="height: 60px; border-radius: 6px;">
+                                        </a>
                                     @else
-                                        <a href="{{url('/edit-product/'.$val->id)}}"><span class="text-muted">No Image</span></a>
+                                        <a href="{{ url('/edit-product/'.$val->id) }}">
+                                            <span class="text-muted">No Image</span>
+                                        </a>
                                     @endif
                                 </td>
-                                <td><a href="{{url('/edit-product/'.$val->id)}}">{{ $val->name }}</a></td>
+                                <td><a href="{{ url('/edit-product/'.$val->id) }}">{{ $val->name }}</a></td>
                                 <td>{{ $val->category->name ?? 'N/A' }}</td>
                                 <td>{{ $val->subcategory->name ?? 'N/A' }}</td>
                                 <td>৳{{ $val->price }}/-</td>
@@ -134,10 +144,13 @@
                                         <span class="badge bg-danger">Not Available</span>
                                     @endif                                    
                                 </td>
-                                <td class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}"><span class="badge bg-primary"><i class="fa-solid fa-circle-plus"></i></span></td>
+                                <td class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $val->id }}">
+                                    <span class="badge bg-primary"><i class="fa-solid fa-circle-plus"></i></span>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
@@ -187,6 +200,31 @@
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
+     <!-- for live search -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $('#search').on('keyup', function() {
+            $value = $(this).val();
+            if($value) {
+                $('.allData').hide();
+                $('.resultData').show();
+            } else {
+                $('.allData').show();
+                $('.resultData').hide();
+            }
+            $.ajax({
+                type:'get',
+                url: '{{URL::to('search/product/stock')}}',
+                data:{'search':$value},
+                
+                success:function(data){
+                    console.log(data);
+                    $('#content').html(data);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

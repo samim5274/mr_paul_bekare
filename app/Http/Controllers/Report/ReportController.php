@@ -16,6 +16,8 @@ use App\Models\Stock;
 use App\Models\Category;
 use App\Models\PaymentMethod;
 use App\Models\DueCollection;
+use App\Models\FactoryStock;
+use App\Models\ExpiredProduct;
 use Auth;
 
 class ReportController extends Controller
@@ -548,8 +550,11 @@ class ReportController extends Controller
     }
 
     public function ExpiredList(){
-        $product = Product::whereBetween('expired', [Carbon::today(), Carbon::today()->addDays(3)])->get();
-        return view('report.product.expired-list', compact('product'));
+        $date = Carbon::today();
+        $product = ExpiredProduct::where('expired_at', $date)->get();
+        $total = ExpiredProduct::where('expired_at', $date)->sum('price');
+        $qty = ExpiredProduct::where('expired_at', $date)->sum('quantity');
+        return view('report.product.expired-list', compact('product','total','qty'));
     }
 
     public function findExpiredItem(Request $request){
@@ -565,5 +570,43 @@ class ReportController extends Controller
             return view('report.print.expired-list-print', compact('product','start','end','total','company'));
         }
         return view('report.product.expired-list', compact('product'));
+    }
+
+    public function findWasteItem(Request $request){
+        $start = $request->input('dtpStart', '');
+        $end = $request->input('dtpEnd', '');
+        if(empty($start) || empty($end)){
+            return redirect()->back()->with('error', 'You need must be set date duration.');
+        }
+        $product = ExpiredProduct::whereBetween('expired_at', [$start, $end])->get();
+        $total = ExpiredProduct::whereBetween('expired_at', [$start, $end])->sum('price');
+        $qty = ExpiredProduct::whereBetween('expired_at', [$start, $end])->sum('quantity');
+        $company = Company::all();
+        if ($request->has('print')) {
+            return view('report.print.expired-list-print', compact('product','start','end','total','company','qty'));
+        }
+        return view('report.product.expired-list', compact('product','total','qty'));
+    }
+
+    public function factoryStock(){
+        $date = Carbon::now()->format('Y-m-d');
+        $stocks = FactoryStock::where('return_date', $date)->paginate(20);
+        $stotalStock = FactoryStock::where('return_date', $date)->sum('quantity');
+        $stotalPrice = FactoryStock::where('return_date', $date)->sum('price');
+        return view('report.factory.factory-stock', compact('stocks','stotalStock','stotalPrice'));
+    }
+
+    public function searchFactoryStock(Request $request){
+        $start = $request->input('dtpStart', now()->format('Y-m-d'));
+        $end   = $request->input('dtpEnd', now()->format('Y-m-d'));
+
+        $stocks = FactoryStock::whereBetween('return_date', [$start, $end])->paginate(20);
+        $stotalStock = FactoryStock::whereBetween('return_date', [$start, $end])->sum('quantity');
+        $stotalPrice = FactoryStock::whereBetween('return_date', [$start, $end])->sum('price');
+        $company = Company::all();
+        if ($request->has('print')) {
+            return view('report.factory.factory-stock-print', compact('stocks','stotalStock','stotalPrice','company'));
+        }
+        return view('report.factory.factory-stock', compact('stocks','stotalStock','stotalPrice'));
     }
 }

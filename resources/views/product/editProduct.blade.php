@@ -143,7 +143,7 @@
 
                                 <div class="col-md-6">
                                     <label for="stock" class="form-label">stock</label>
-                                    <input type="number" id="stock" name="txtStock" value="{{$data->stock}}" class="form-control" required>
+                                    <input type="number" id="stock" name="txtStock" value="{{$data->stock}}" class="form-control" readonly required>
                                 </div>
 
                                 <div class="col-md-6">

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Sale\SaleController;
+use App\Http\Controllers\Sale\SaleReturnController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Report\ReportController;
@@ -78,6 +79,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/update-product/{id}', [ProductController::class, 'updateProduct']);
     Route::get('/product-delete/{id}', [ProductController::class, 'delete']);
     Route::get('/product-stock', [ProductController::class, 'stockShow'])->name('product.stock.show');
+    Route::get('/search/product/stock', [ProductController::class, 'findProduct']);
     Route::post('/stock-in/{id}', [ProductController::class, 'stockIn']);
 
     Route::get('/sale-view', [SaleController::class, 'saleView'])->name('sale.view');
@@ -87,6 +89,12 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/cart-view', [SaleController::class, 'cartView']);
     Route::post('/cart/update-quantity', [SaleController::class, 'updateQuantity']);
     Route::get('/remove-to-cart/{id}/{reg}', [SaleController::class, 'removeCart']);
+
+    Route::get('/sale-return', [SaleReturnController::class, 'purchaseReturn'])->name('purchase-return-view');
+    Route::get('/add-cart-return', [SaleReturnController::class, 'addCartReturn']);
+    Route::post('/return-cart/update-quantity', [SaleReturnController::class, 'updateQuantity']);
+    Route::get('/remove-to-return-cart/{id}/{reg}', [SaleReturnController::class, 'removeCart']);
+    Route::post('/purchase/return/confirm', [SaleReturnController::class, 'saleReturnConfirm']);
 
     Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
     Route::get('/sale-order-list', [OrderController::class, 'paymentOrder'])->name('order.payment');
@@ -125,8 +133,11 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/search-report-date-category', [ReportController::class, 'categoryDateReportFind']);
     Route::get('/expired-list', [ReportController::class, 'ExpiredList']);
     Route::get('/search-expired-item', [ReportController::class, 'findExpiredItem']);
+    Route::get('/search-waste-item', [ReportController::class, 'findWasteItem']);
     Route::get('/payment-mathods', [ReportController::class, 'paymentMethod'])->name('payment-methods-wise-report-view');
     Route::get('/search-report-date-payment-method', [ReportController::class, 'findPaymentMethodSaleReport']);
+    Route::get('/factory-stock-report', [ReportController::class, 'factoryStock'])->name('factory-stock-report-view');
+    Route::post('/search-factory-stock', [ReportController::class, 'searchFactoryStock']);
 
     Route::get('/stock-report', [ReportController::class, 'stockReport'])->name('stock.report.view');
     Route::get('/print-total-stock', [ReportController::class, 'printStockReport']);
@@ -151,7 +162,6 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/update-order-qty/{reg}/{id}', [PurchaseController::class, 'UpdatePurchaseQty']);
     Route::get('/print-all-purchase-list', [PurchaseController::class, 'printPurchaseList']);
     Route::get('/print-specific-purchase-order/{reg}', [PurchaseController::class, 'printSpecificPurchaseOrder']);
-    Route::get('/sale-return', [PurchaseController::class, 'purchaseReturn'])->name('purchase-return-view');
     Route::post('/purchase-return-confirm', [PurchaseController::class, 'purchaseReturnConfirm']);
 
     Route::get('/factory', [FactoryController::class, 'factoryView'])->name('factory.view');
@@ -170,6 +180,9 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/view-delivery-item/{reg}', [FactoryController::class, 'deliveryCart']);
     Route::get('/stock-received/{p_id}/{reg}', [FactoryController::class, 'stockReceived']);
     Route::get('/print-all-product-order-list', [FactoryController::class, 'printProductPurchaseOrder']);
+    Route::get('/factory-return', [FactoryController::class, 'factoryReturn'])->name('factory-return-product-view');
+    Route::get('/search/product/factory/return', [FactoryController::class, 'serchFactoryReturn']);
+    Route::post('/factory-return-qty/{productId}', [FactoryController::class, 'factoryReturnQty']);
 
     Route::get('/expenses-view', [ExpensesController::class, 'expensesView'])->name('expenses.view');
     Route::get('/getSubCategory/{id}', [ExpensesController::class, 'getSubcategory']);

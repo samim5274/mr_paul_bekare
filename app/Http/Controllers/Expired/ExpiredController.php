@@ -32,7 +32,7 @@ class ExpiredController extends Controller
         $data = new ExpiredProduct();
         $data->product_id = $product->id;
         $data->name = $product->name;
-        $data->price = $product->price;
+        $data->price = (float) $product->price * (int)$stockQty;
         $data->quantity = $stockQty;
         $data->expired_at = $date;
 
@@ -43,7 +43,7 @@ class ExpiredController extends Controller
         $stock->date = $date;
         $stock->product_id = $product->id;
         $stock->stockOut = $stockQty;
-        $stock->status = 1; // 1 sale, 2 return, 3 stock in and 4 stock out
+        $stock->status = 4; // 1 sale, 2 return, 3 stock in and 4 stock out
         $stock->remark = 'Waste';
 
         $data->save();

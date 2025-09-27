@@ -40,29 +40,40 @@
                         <span class="pc-mtext">Sale list</span>
                     </a>
                 </li>
-                <!-- <li class="pc-item">
+                <li class="pc-item">
                     <a href="{{url('/sale-return')}}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-arrow-rotate-left"></i></span>
+                        <span class="pc-micon"><i class="fa-regular fa-share-from-square"></i></span>
                         <span class="pc-mtext">Sale Return</span>
                     </a>
-                </li> -->
+                </li>
                 <li class="pc-item">
                     <a href="{{url('/sale-due-collection')}}" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-sack-dollar"></i></span>
                         <span class="pc-mtext">Due Collection</span>
                     </a>
                 </li>
-                <li class="pc-item">
+                <!-- <li class="pc-item">
                     <a href="{{url('/return-order-list')}}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-regular fa-share-from-square"></i></i></span>
+                        <span class="pc-micon"><i class="fa-solid fa-arrow-rotate-left"></i></span>
                         <span class="pc-mtext">Return</span>
                     </a>
-                </li>
+                </li> -->
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-trash"></i></span><span class="pc-mtext">Waste Product</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{url('/expired-product')}}">Waste Product</a></li>
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link">Waste Report's<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="{{url('/expired-list')}}">Waste Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>                
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-chart-pie"></i></span><span class="pc-mtext">Stock</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">                        
                         <li class="pc-item"><a href="{{url('/product-stock')}}" class="pc-link"><span class="pc-mtext">Min 10 Stock</span></a></li>
-                        <li class="pc-item"><a href="{{url('/expired-product')}}" class="pc-link"><span class="pc-mtext">Waste Product</span></a></li>
                     </ul>
                 </li>
                 <li class="pc-item">
@@ -70,6 +81,18 @@
                         <span class="pc-micon"><i class="fa-solid fa-id-card-clip"></i></span>
                         <span class="pc-mtext">Profile</span>
                     </a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-industry"></i></i></span><span class="pc-mtext">Factory</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{url('/factory-return')}}">Factory Return</a></li>
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link">Factory Report's<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="{{url('/factory-stock-report')}}">Return Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
                 
                 
@@ -101,9 +124,21 @@
                         <span class="pc-micon"><i class="fa-solid fa-circle-dollar-to-slot"></i></i></span>
                         <span class="pc-mtext">Expenses</span>
                     </a>
+                </li>                
+                <li class="pc-item">
+                    <a href="{{url('/ber-code')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-barcode"></i></span>
+                        <span class="pc-mtext">Ber-code</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{{url('/account-details')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-circle-dollar-to-slot"></i></span>
+                        <span class="pc-mtext">Total Transection</span>
+                    </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Reports</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Report's</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{url('/total-sale')}}">Total Sale</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/paid-list')}}">Paid List</a></li>
@@ -144,7 +179,6 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <!-- <li class="pc-item"><a class="pc-link" href="{{url('/expired-list')}}">Expired</a></li> -->
                         <li class="pc-item"><a class="pc-link" href="{{url('/chart')}}">Chart</a></li>
                         <li class="pc-item pc-hasmenu">
                             <a href="#!" class="pc-link">Expenses Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -156,18 +190,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="pc-item">
-                    <a href="{{url('/ber-code')}}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-barcode"></i></i></span>
-                        <span class="pc-mtext">Ber-code</span>
-                    </a>
-                </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-gears"></i></span><span class="pc-mtext">Setting</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">                        
                         <li class="pc-item"><a href="{{url('/product-view')}}" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-chart-simple"></i></span><span class="pc-mtext">Product</span></a></li>
                         <li class="pc-item"><a href="{{url('/branch')}}" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-code-branch"></i></span><span class="pc-mtext">Branch</span></a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{url('/account-details')}}"><i class="fa-solid fa-circle-dollar-to-slot me-3"></i>Total Transection</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/permission')}}"><i class="fa-solid fa-lock me-3"></i>Permission</a></li>
                         <li class="pc-item"><a href="{{url('/backup-database')}}" class="pc-link"><i class="fa-solid fa-download me-3"></i></i>Backup DB</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/setting')}}"><i class="fa-solid fa-gear me-3"></i>Setting</a></li>

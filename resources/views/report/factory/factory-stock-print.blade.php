@@ -68,36 +68,54 @@
         <h1>{{ $company[0]->name }}</h1>
         <p>{{ $company[0]->address }}</p>
         <p>Email: {{ $company[0]->email }} || Phone: {{ $company[0]->phone }} || Website: {{ $company[0]->website }}</p>
-        <h5 style="text-align:center;">{{$start}} to {{$end}} Wise Sale List</h5>
+        <h2 style="text-align:center;">Factory Stock Report's</h2>
         <hr>
         <!-- <div class="qrImg">
             {!! QrCode::size(60)->generate('Abir Bekare & Foods') !!}
         </div> -->
-        <table class="table table-bordered table-striped " id="printableTable">
+        <table class="table table-bordered table-striped" id="printableTable">
             <thead class="table-primary">
                 <tr>
-                    <th class="text-center" style="width: 50px">#</th>
+                    <th>#</th>
+                    <th>Date</th>
                     <th>Product</th>
-                    <th class="text-center">Qty</th>
-                    <th class="text-center">Price</th>
+                    <th>Seller</th>
+                    <th>Quantity</th>
+                    <th>Reason</th>
+                    <th>Price (৳)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($product as $key => $val)
+                @php
+                    $totalQuantity = 0;
+                    $totalPrice = 0;
+                @endphp
+
+                @foreach($stocks as $key => $val)
+                @php
+                    $totalQuantity += $val->quantity;
+                    $totalPrice += $val->price;
+                @endphp
                 <tr>
-                    <td class="text-center">{{ $key + 1 }}</td>
-                    <td>{{ $val->name }}</td>
-                    <td class="text-center" style="width: 150px">{{$val->quantity}}</td>
-                    <td class="text-center" style="width: 150px">৳{{$val->price}}/-</td>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $val->return_date }}</td>
+                    <td>{{ $val->product->name ?? 'N/A' }}</td>
+                    <td>{{ $val->user->name }}</td>
+                    <td>{{ $val->quantity }}</td>
+                    <td>{{ $val->reason ?? '-' }}</td>
+                    <td class="text-center">৳{{ $val->price }}/-</td>
                 </tr>
                 @endforeach
+
                 <tr class="table-info">
-                    <td colspan="2">Total:</td>
-                    <td class="text-center">{{$qty}}</td>
-                    <td class="text-center">৳{{$total}}/-</td>
+                    <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                    <td><strong>{{ $totalQuantity }}</strong></td>
+                    <td></td>
+                    <td class="text-center"><strong>৳{{ $totalPrice }}/-</strong></td>
                 </tr>
             </tbody>
         </table>
+
     </div>
 
     <div class="signature-section">

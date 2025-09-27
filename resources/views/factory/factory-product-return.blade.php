@@ -46,7 +46,7 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Product List for Waste</h4>
+                    <h4 class="m-0">Factory Return Product's</h4>
                     <!-- <h5 class="m-0 text-primary">
                         <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5> -->
@@ -62,8 +62,9 @@
                             <tr>
                                 <th class="text-center" style="width: 50px;">#</th>
                                 <th>Product</th>
+                                <th class="text-center" style="width: 120px;">Price</th>
                                 <th class="text-center" style="width: 120px;">Stock</th>
-                                <th class="text-center" style="width: 200px;">Action</th>
+                                <th class="text-center" style="width: 300px;">Action</th>
                             </tr>
                         </thead>
                         <tbody class="resultData" id="content"></tbody>
@@ -77,12 +78,13 @@
                                                 {{ $val->name }}
                                             </a>
                                         </td>
+                                        <td class="text-center">{{ $val->price }}</td>
                                         <td class="text-center">{{ $val->stock }}</td>
                                         <td class="text-center">
-                                            <form action="{{ url('/update-stock/'.$val->id) }}" method="POST" class="d-flex justify-content-center align-items-center gap-2">
+                                            <form action="{{ url('/factory-return-qty/'.$val->id) }}" method="POST" class="d-flex justify-content-center align-items-center gap-2">
                                                 @csrf
-                                                <input type="number" name="stock" value="{{ $val->stock }}" max="{{ $val->stock }}" min="0"
-                                                    class="form-control form-control-sm text-center" style="max-width: 100px;">
+                                                <input type="number" name="stock" value="{{ $val->stock }}" max="{{ $val->stock }}" min="0" required class="form-control form-control-sm text-center" style="max-width: 100px;">
+                                                <input type="text" name="reason" value="N/A" required class="form-control form-control-sm text-center" style="max-width: 100px;">
                                                 <button type="submit" class="btn btn-sm btn-success">Save</button>
                                             </form>
                                         </td>
@@ -124,7 +126,7 @@
             }
             $.ajax({
                 type:'get',
-                url: '{{URL::to('search/product')}}',
+                url: '{{URL::to('search/product/factory/return')}}',
                 data:{'search':$value},
                 
                 success:function(data){

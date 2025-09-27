@@ -199,6 +199,49 @@ class ProductController extends Controller
         return view('product.stock', compact('product'));
     }
 
+    public function findProduct(Request $request){
+        $output = "";
+        $products = Product::where('stock', '<=' , 10)
+                            ->where('name', 'like', '%'.$request->search.'%')
+                            ->orWhere('id', 'like', '%'.$request->search.'%')
+                            ->orWhere('sku', 'like', '%'.$request->search.'%')
+                            ->get();
+
+        foreach($products as $key => $val){
+            $editProduct = url('/edit-product/'.$val->id);   
+            $image = url('img/food/'.$val->image);
+            $name = strlen($val->name) > 22 ? substr($val->name, 0, 22).'...' : $val->name;
+
+            $output .= '<tr>';
+            $output .= '<td>'.($key + 1).'</td>';
+            $output .= '<td>';
+            if ($val->image) {
+                $output .= '<a href="'.$editProduct.'"><img src="'.$image.'" alt="Product Image" style="height: 60px; border-radius: 6px;"></a>';
+            } else {
+                $output .= '<a href="'.$editProduct.'"><span class="text-muted">No Image</span></a>';
+            }
+            $output .= '</td>';
+            $output .= '<td><a href="'.$editProduct.'">'.$name.'</a></td>';
+            $output .= '<td>'.($val->category->name ?? 'N/A').'</td>';
+            $output .= '<td>'.($val->subcategory->name ?? 'N/A').'</td>';
+            $output .= '<td>৳'.$val->price.'/-</td>';
+            $output .= '<td>'.$val->stock.'</td>';
+            $output .= '<td>'.($val->size ?? '-').'</td>';
+            $output .= '<td class="text-center">';
+            if ($val->availability) {
+                $output .= '<span class="badge bg-success">Available</span>';
+            } else {
+                $output .= '<span class="badge bg-danger">Not Available</span>';
+            }
+            $output .= '</td>';
+            $output .= '<td class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal'.$val->id.'"><span class="badge bg-primary"><i class="fa-solid fa-circle-plus"></i></span></td>';
+            $output .= '</tr>';
+        }
+
+        return response($output);
+    }
+
+
     public function stockIn(Request $request, $id) {
         $product = Product::where('id', $id)->first();
         if(!$product){

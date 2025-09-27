@@ -107,7 +107,7 @@
                 $('.resultData').show();
             } else {
                 $('.allData').show();
-                $('.resultData').shhideow();
+                $('.resultData').hide();
             }
             $.ajax({
                 type:'get',
