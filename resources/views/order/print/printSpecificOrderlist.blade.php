@@ -2,63 +2,125 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <title>Invoice - {{ $company[0]->name }}</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         @page {
-            size: 80mm auto; /* 80mm width, height auto */
-            margin: 0;       /* remove default margins */
+            size: 80mm auto;
+            margin: 2mm;
         }
 
         body {
-            font-family: 'DejaVu Sans', sans-serif;
-            font-size: 12px;
-            margin: 0;
-            padding: 0;
-            width: 80mm;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 10px;
+            width: 70mm;
+            margin: 0 auto;
+            line-height: 1.3;
         }
 
-        .invoice {
-            padding: 5px;
-        }
-
-        h2, h4, p {
-            margin: 2px 0;
+        .invoice-header {
             text-align: center;
+            padding: 5px 0;
+            border-bottom: 1px dashed #000;
+            margin-bottom: 8px;
+        }
+
+        .invoice-header h2 {
+            font-size: 14px;
+            margin: 2px 0;
+            text-transform: uppercase;
+        }
+
+        .invoice-header p {
+            margin: 0;
+            font-size: 9px;
+        }
+
+        .invoice-header .order-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .invoice-subheader {
+            margin-bottom: 8px;
+            font-size: 10px;
+        }
+
+        .invoice-subheader .info-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 1px 0;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 8px;
-            font-size: 12px;
+            margin-bottom: 8px;
+            font-size: 10px;
         }
 
         table th, table td {
-            border: 1px dashed #000;
-            padding: 4px;
+            padding: 2px 0;
+            border: none;
+            text-align: right;
+            white-space: pre-wrap;
+        }
+
+        table thead {
+            border-bottom: 1px dashed #000;
+        }
+
+        table th:nth-child(1), table td:nth-child(1) { width: 5%; text-align: left; }
+        table th:nth-child(2), table td:nth-child(2) { width: 45%; text-align: left; }
+        table th:nth-child(3), table td:nth-child(3) { width: 10%; text-align: right; }
+        table th:nth-child(4), table td:nth-child(4) { width: 20%; text-align: right; }
+        table th:nth-child(5), table td:nth-child(5) { width: 20%; text-align: right; }
+
+        /* -------- Totals Section -------- */
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+
+        .totals-table tr td {
+            padding: 2px 0;
+        }
+
+        .totals-table td:first-child {
             text-align: left;
+            width: 50%;
         }
 
-        table th {
-            background: #f2f2f2;
+        .totals-table td:last-child {
+            text-align: right;
+            width: 50%;
         }
 
-        .totals td {
+        .separator {
+            border-top: 1px dashed #000;
+        }
+
+        .final-total {
             font-weight: bold;
+            font-size: 11px;
         }
 
         .note {
             text-align: center;
-            margin-top: 10px;
-            font-size: 10px;
-        }
-
-        @media print {
-            body {
-                margin: 0;
-            }
+            margin-top: 5px;
+            font-size: 9px;
+            color: #000;
+            padding-top: 5px;
         }
     </style>
-    
 </head>
 <body>
 
@@ -66,20 +128,27 @@
         <h2>{{ $company[0]->name }}</h2>
         <p>{{ $company[0]->address }}</p>
         <p>{{ $company[0]->email }} || {{ $company[0]->phone }}</p>
-        <p><strong>Order Invoice</strong></p>
+        <p class="order-title">INVOICE</p>
     </div>
 
     <div class="invoice-subheader">
-        <p><strong>Billing:</strong> {{ $cart[0]->user->name }}||<strong>C.Name:</strong> {{ $order->customerName }}||<strong>C.Phone:</strong> {{ $order->customerPhone }}</p>
+        <div class="info-line">
+            <span><strong>Bill Officer:</strong> {{ $cart[0]->user->name }} </span>
+            <span><strong>Customer:</strong> {{ $order->customerName }}</span>
+        </div>
+        <div class="info-line">
+            <span><strong>C.Phone:</strong> {{ $order->customerPhone }}</span>
+            <span><strong>Date:</strong> {{ $order->created_at->format('d-m-Y') }}</span>
+        </div>
     </div>
-
+    
     <table>
         <thead>
             <tr>
                 <th>#</th>
-                <th>P.Name</th>
+                <th>Item</th>
                 <th>Qty</th>
-                <th>৳/Item</th>
+                <th>৳/Unit</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -87,7 +156,7 @@
             @foreach($cart as $key => $val)
             <tr>
                 <td>{{ $key + 1 }}</td>
-                <td>{{ $val->product->name }}</td>
+                <td>{{ Illuminate\Support\Str::limit($val->product->name, 15, '...') }}</td>
                 <td>{{ $val->quantity }}</td>
                 <td>{{ number_format($val->price, 2) }}</td>
                 <td>{{ number_format($val->price * $val->quantity, 2) }}</td>
@@ -96,36 +165,35 @@
         </tbody>
     </table>
 
-    <table class="totals">
-        <tr>
+    <table class="totals-table">
+        <tr class="separator">
             <td>Subtotal:</td>
             <td>৳{{ number_format($order->total, 2) }}</td>
         </tr>
         <tr>
             <td>Discount:</td>
-            <td>৳{{ number_format($order->discount, 2) }}</td>
+            <td>- ৳{{ number_format($order->discount, 2) }}</td>
         </tr>
         <tr>
             <td>VAT:</td>
-            <td>৳{{ number_format($order->vat, 2) }}</td>
+            <td>+ ৳{{ number_format($order->vat, 2) }}</td>
         </tr>
-        <tr>
+        <tr class="separator final-total">
             <td>Payable:</td>
-            <td><strong>৳{{ number_format($order->payable, 2) }}</strong></td>
+            <td>৳{{ number_format($order->payable, 2) }}</td>
         </tr>
         <tr>
             <td>Paid:</td>
             <td>৳{{ number_format($order->pay, 2) }}</td>
         </tr>
         <tr>
-            <td>Due:</td>
-            <td>৳{{ number_format($order->due, 2) }}</td>
+            <td class="final-total">Due:</td>
+            <td class="final-total">৳{{ number_format($order->due, 2) }}</td>
         </tr>
     </table>
 
+    <p class="note">Developed by <strong>SAMIM-HosseN</strong> || +8801762164746</p>
 
-    <p class="note">Developed by SAMIM-HosseN | Call: +8801624209291</p>
-    <!-- auto print -->
     <script>
         window.onload = function() {
             window.print();
@@ -134,6 +202,5 @@
             }, 300);
         };
     </script>
-
 </body>
 </html>
