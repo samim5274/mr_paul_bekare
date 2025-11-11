@@ -22,8 +22,8 @@
 
         body {
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 9.5px;
-            width: 70mm;
+            font-size: 10px;
+            width: 68mm;
             margin: 0 auto;
             padding: 2mm 2mm;
             line-height: 1.3;
@@ -44,7 +44,7 @@
 
         .invoice-header p {
             margin: 0;
-            font-size: 9px;
+            font-size: 10px;
         }
 
         .invoice-header .order-title {
@@ -92,7 +92,7 @@
         .totals-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9.5px; 
+            font-size: 10px; 
             margin-bottom: 10px;
         }
 
@@ -121,10 +121,11 @@
 
         .note {
             text-align: center;
+            font-size: 10px;
             margin-top: 5px;
-            font-size: 9px;
-            color: #000;
+            margin-bottom: 15px;
             padding-top: 5px;
+            page-break-inside: avoid;
         }
     </style>
 </head>
@@ -198,7 +199,11 @@
         </tr>
     </table>
 
-    <p class="note">Developed by <strong>SAMIM-HosseN</strong> || +8801762164746</p>
+    <div class="note">
+        Developed by <strong>SAMIM-HosseN</strong> || +8801762164746
+    </div>
+    
+    <div class="note">.</div>
 
     <script>
         window.onload = function() {
