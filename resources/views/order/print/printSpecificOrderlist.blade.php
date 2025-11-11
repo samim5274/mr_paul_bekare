@@ -12,14 +12,20 @@
 
         @page {
             size: 80mm auto;
-            margin: 2mm;
+            margin: 0;
+        }
+        
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         body {
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 10px;
+            font-size: 9.5px;
             width: 70mm;
             margin: 0 auto;
+            padding: 2mm 2mm;
             line-height: 1.3;
         }
 
@@ -62,7 +68,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 8px;
-            font-size: 10px;
+            font-size: 9.5px;
         }
 
         table th, table td {
@@ -77,16 +83,16 @@
         }
 
         table th:nth-child(1), table td:nth-child(1) { width: 5%; text-align: left; }
-        table th:nth-child(2), table td:nth-child(2) { width: 45%; text-align: left; }
+        table th:nth-child(2), table td:nth-child(2) { width: 40%; text-align: left; }
         table th:nth-child(3), table td:nth-child(3) { width: 10%; text-align: right; }
         table th:nth-child(4), table td:nth-child(4) { width: 20%; text-align: right; }
-        table th:nth-child(5), table td:nth-child(5) { width: 20%; text-align: right; }
+        table th:nth-child(5), table td:nth-child(5) { width: 25%; text-align: right; }
 
         /* -------- Totals Section -------- */
         .totals-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10px;
+            font-size: 9.5px; 
             margin-bottom: 10px;
         }
 
