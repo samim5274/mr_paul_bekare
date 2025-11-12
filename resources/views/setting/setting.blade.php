@@ -61,7 +61,7 @@
                                 <div class="col-md-4 mb-4 mb-md-0">
                                     <h5 class="menu-item" data-target="personal"><i class="fa-solid fa-id-card-clip me-3"></i>Personal Details</h5><hr>
                                     <h5 class="menu-item" data-target="privacy"><i class="fa-solid fa-lock me-3"></i>Privacy</h5><hr>
-                                    <h5 class="menu-item" data-target="verification"><i class="fa-solid fa-certificate me-3"></i>Verification</h5><hr>
+                                    <h5 class="menu-item" data-target="Category"><i class="fa-solid fa-table-columns me-3"></i>Category</h5><hr>
                                     <h5 class="menu-item" data-target="checkup"><i class="fa-solid fa-user-tie me-3"></i>Account Checkup</h5><hr>
                                     <h5 class="menu-item" data-target="terms"><i class="fa-solid fa-paperclip me-3"></i></i>Terms of Service</h5><hr>
                                     <h5 class="menu-item" data-target="policy"><i class="fa-solid fa-shield-halved me-3"></i>Privacy Policy</h5><hr>
@@ -163,9 +163,18 @@
                                         </div>
                                     </div>
 
-                                    <div id="verification" class="detail-section d-none">
-                                        <h4>Verification</h4>
-                                        <p>Verification details here...</p>
+                                    <div id="Category" class="detail-section d-none">
+                                        <h4>Category</h4>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form action="{{ url('/create-product-category') }}" method="POST">
+                                                    @csrf
+                                                    <input type="text" class="form-control" name="txtCategory" required placeholder="Category name">
+                                                    <button type="submit" class="form-control mt-2">Save</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6"></div>
+                                        </div>
                                     </div>
                                     <div id="checkup" class="detail-section d-none">
                                         <h4>Account Checkup</h4>

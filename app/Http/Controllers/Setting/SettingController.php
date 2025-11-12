@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 use App\Models\Admin;
+use App\Models\Category;
 use Auth;
 
 class SettingController extends Controller
@@ -36,5 +37,14 @@ class SettingController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Password updated successfully!');
+    }
+
+    public function createCategory(Request $request){
+        $category = $request->input('txtCategory', '');
+
+        $data = new Category();
+        $data->name = $category;
+        $data->save();
+        return redirect()->back()->with('success', 'New product category created successfully!');
     }
 }
