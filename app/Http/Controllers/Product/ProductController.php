@@ -258,4 +258,9 @@ class ProductController extends Controller
         $stock->save();
         return redirect()->back()->with('success','Product stock in successfully submited.');
     }
+
+    public function productStockIn(){
+        $products = Product::paginate(20);       
+        return view('product.stock.stockIn', compact('products'));
+    }
 }

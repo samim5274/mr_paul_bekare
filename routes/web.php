@@ -81,6 +81,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/product-stock', [ProductController::class, 'stockShow'])->name('product.stock.show');
     Route::get('/search/product/stock', [ProductController::class, 'findProduct']);
     Route::post('/stock-in/{id}', [ProductController::class, 'stockIn']);
+    Route::get('/product-stock-in', [ProductController::class, 'productStockIn'])->name('product.stock.in.view');
 
     Route::get('/sale-view', [SaleController::class, 'saleView'])->name('sale.view');
     Route::get('/search', [SaleController::class, 'liveSearch']);

@@ -73,6 +73,7 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-chart-pie"></i></span><span class="pc-mtext">Stock</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">                        
+                        <li class="pc-item"><a href="{{url('/product-stock-in')}}" class="pc-link"><span class="pc-mtext">Stock In</span></a></li>
                         <li class="pc-item"><a href="{{url('/product-stock')}}" class="pc-link"><span class="pc-mtext">Min 10 Stock</span></a></li>
                     </ul>
                 </li>
