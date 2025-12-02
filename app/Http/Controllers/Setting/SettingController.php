@@ -61,4 +61,49 @@ class SettingController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'New product sub-category created successfully!');
     }
+
+    public function updateCategory(Request $request, $id){
+        $request->validate([
+            'txtCategory' => 'required|string|max:255|unique:categories,name,' . $id,
+        ], [
+            'txtCategory.required' => 'Category name is required.',
+            'txtCategory.max' => 'Category name cannot exceed 255 characters.',
+            'txtCategory.unique' => 'This category name already exists.',
+        ]);
+
+        $name = $request->input('txtCategory', '');
+
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->back()->with('warning', 'Category not found. Please try again.');
+        }
+        $category->name = $name;
+        $category->update();
+        return redirect()->back()->with('success', 'Category update successfully!');
+    }
+
+    public function updateSubCategory(Request $request, $id){
+        $request->validate([
+            'cbxCategory' => 'required|exists:categories,id',
+            'txtSubCategory' => 'required|string|max:255|unique:subcategories,name,' . $id,
+        ], [
+            'cbxCategory.required' => 'Please select a category.',
+            'cbxCategory.exists' => 'Selected category does not exist.',
+            'txtSubCategory.required' => 'Sub-category name is required.',
+            'txtSubCategory.max' => 'Sub-category name cannot exceed 255 characters.',
+            'txtSubCategory.unique' => 'This sub-category name already exists.',
+        ]);
+        
+        $category = $request->input('cbxCategory', '');
+        $subcategory = $request->input('txtSubCategory', '');
+        
+        $data = Subcategory::find($id);
+        if (!$data) {
+            return redirect()->back()->with('warning', 'Sub-Category not found. Please try again.');
+        }
+        $data->category_id = $category;
+        $data->name = $subcategory;
+        $data->save();
+        return redirect()->back()->with('success', 'Sub-Category update successfully!');
+    }
 }

@@ -177,12 +177,37 @@
                                             <div class="col-md-6">
                                                 <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
                                                     @foreach($categories as $val)
-                                                        <p style="margin: 0 0 5px 0;">{{ $val->name }}</p>
+                                                        <p style="margin: 0 0 5px 0;" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $val->id }}">{{ $val->name }}</p>
                                                     @endforeach
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @foreach($categories as $key => $val)
+                                    <div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="{{url('/update-category/'.$val->id)}}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel"><a href="{{url('/edit-product/'.$val->id)}}">{{ $val->name }}</a></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-md-12">
+                                                            <label for="Category_id" class="form-label">Category:</label>
+                                                            <input type="text" id="Category_id" name="txtCategory" class="form-control" min="0" placeholder="Enter category name" value="{{ $val->name }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                     <div id="SubCategory" class="detail-section d-none">
                                         <h4>Create Sub-Category</h4>
                                         <div class="row">
@@ -202,7 +227,7 @@
                                             <div class="col-md-6">
                                                 <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
                                                     @foreach($subcategories as $val)
-                                                        <div style="margin-bottom: 6px; font-size: 14px;">
+                                                        <div style="margin-bottom: 6px; font-size: 14px;" data-bs-toggle="modal" data-bs-target="#subcategory{{ $val->id }}">
                                                             <strong>{{ $val->category->name }}</strong> → {{ $val->name }}
                                                         </div>
                                                     @endforeach
@@ -210,6 +235,40 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @foreach($subcategories as $key => $val)
+                                    <div class="modal fade" id="subcategory{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="{{url('/update-sub-category/'.$val->id)}}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel"><a href="{{url('/edit-product/'.$val->id)}}">{{ $val->name }}</a></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-md-12">
+                                                            <select name="cbxCategory" id="categroy" class="form-control" required>
+                                                                <option selected disabled>-- Select Category --</option>
+                                                                @foreach($categories as $category)
+                                                                    <option value="{{ $category->id }}" 
+                                                                        {{ $category->id == $val->category_id ? 'selected' : '' }}>
+                                                                        {{ $category->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="subCategory_id" class="form-label">Category:</label>
+                                                            <input type="text" id="subCategory_id" name="txtSubCategory" class="form-control" min="0" placeholder="Enter sub-category name" value="{{ $val->name }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                     <div id="checkup" class="detail-section d-none">
                                         <h4>Account Checkup</h4>
                                         <p>Checkup details...</p>
