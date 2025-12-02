@@ -57,6 +57,7 @@
                                 <th>#</th>
                                 <!-- <th>Image</th> -->
                                 <th class="text-start">Name</th>
+                                <th>SKU</th>
                                 <th>Stock</th>
                                 <th>Size</th>
                                 <th>Manufactured</th>
@@ -76,6 +77,7 @@
                                     @endif
                                 </td> -->
                                 <td class="text-start"><a href="{{url('/generate/bercode/'.$val->id)}}">{{ $val->name }}</a></td>
+                                <td>{{ $val->sku }}</td>
                                 <td>{{ $val->stock }}</td>
                                 <td>{{ $val->size ?? '-' }}</td>
                                 <td>{{ \Carbon\Carbon::parse($val->manufactured)->format('d M Y') }}</td>
