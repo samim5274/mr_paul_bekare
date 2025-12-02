@@ -177,6 +177,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
+                        <label for="date" class="form-label">Expired Date:</label>
+                        <input type="date" id="date" name="dtpDate" class="form-control" value="{{ $val->expired }}" required>
+                    </div>
+                    <div class="col-md-12">
                         <label for="Stock" class="form-label">Stock Qty:</label>
                         <input type="number" id="Stock" name="txtStock" class="form-control" min="0" placeholder="Enter stock qty" required>
                     </div>

@@ -73,9 +73,9 @@ class SaleController extends Controller
             return redirect()->back()->with('warning','Sorry 😞 This item stock not availabel righ now. Try to another. Thank You!');
         }
 
-        // if($product->expired < Carbon::today()){
-        //     return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
-        // }
+        if($product->expired < Carbon::today()){
+            return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
+        }
 
         $reg = $this->generateRegNum();
         $findFood = Cart::where('reg', $reg)->where('product_id', $product->id)->first();
@@ -120,9 +120,9 @@ class SaleController extends Controller
             return redirect()->back()->with('warning','Sorry 😞 This item stock not availabel righ now. Try to another. Thank You!');
         }
 
-        // if($product->expired < Carbon::today()){
-        //     return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
-        // }
+        if($product->expired < Carbon::today()){
+            return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
+        }
 
         $reg = $this->generateRegNum();
 

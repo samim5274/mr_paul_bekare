@@ -247,6 +247,10 @@ class ProductController extends Controller
         if(!$product){
             return redirect()->back()->with('warning', 'Product not found. Please try again');
         }
+
+        $product->expired = $request->dtpDate;
+        $product->update();
+
         $product->stock += $request->input('txtStock', '');
         $stock = new Stock();
         $stock->stockIn = $request->input('txtStock', '');
