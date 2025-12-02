@@ -61,7 +61,7 @@
                                 <div class="col-md-4 mb-4 mb-md-0">
                                     <h5 class="menu-item" data-target="personal"><i class="fa-solid fa-id-card-clip me-3"></i>Personal Details</h5><hr>
                                     <h5 class="menu-item" data-target="privacy"><i class="fa-solid fa-lock me-3"></i>Privacy</h5><hr>
-                                    <h5 class="menu-item" data-target="Category"><i class="fa-solid fa-table-columns me-3"></i>Category</h5><hr>
+                                    <h5 class="menu-item" data-target="Category"><i class="fa-solid fa-tablet-screen-button me-3"></i>Category</h5><hr>
                                     <h5 class="menu-item" data-target="SubCategory"><i class="fa-solid fa-table-columns me-3"></i>Sub-Category</h5><hr>
                                     <h5 class="menu-item" data-target="checkup"><i class="fa-solid fa-user-tie me-3"></i>Account Checkup</h5><hr>
                                     <h5 class="menu-item" data-target="terms"><i class="fa-solid fa-paperclip me-3"></i></i>Terms of Service</h5><hr>
