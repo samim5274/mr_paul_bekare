@@ -9,6 +9,7 @@ use Illuminate\Validation\Rules\Password;
 
 use App\Models\Admin;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Auth;
 
 class SettingController extends Controller
@@ -16,7 +17,9 @@ class SettingController extends Controller
     public function setting(){
         $id = Auth::guard('admin')->user()->id;
         $user = Admin::where('id', $id)->with('branch')->first();
-        return view('setting.setting', compact('user'));
+        $categories = Category::all();
+        $subcategories = Subcategory::with('category')->get();
+        return view('setting.setting', compact('user','categories','subcategories'));
     }
 
     public function changePass(Request $request){
@@ -46,5 +49,16 @@ class SettingController extends Controller
         $data->name = $category;
         $data->save();
         return redirect()->back()->with('success', 'New product category created successfully!');
+    }
+
+    public function createSubCategory(Request $request){
+        $category = $request->input('cbxCategory', '');
+        $subcategory = $request->input('txtSubCategory', '');
+
+        $data = new Subcategory();
+        $data->category_id = $category;
+        $data->name = $subcategory;
+        $data->save();
+        return redirect()->back()->with('success', 'New product sub-category created successfully!');
     }
 }

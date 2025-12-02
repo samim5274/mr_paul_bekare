@@ -62,6 +62,7 @@
                                     <h5 class="menu-item" data-target="personal"><i class="fa-solid fa-id-card-clip me-3"></i>Personal Details</h5><hr>
                                     <h5 class="menu-item" data-target="privacy"><i class="fa-solid fa-lock me-3"></i>Privacy</h5><hr>
                                     <h5 class="menu-item" data-target="Category"><i class="fa-solid fa-table-columns me-3"></i>Category</h5><hr>
+                                    <h5 class="menu-item" data-target="SubCategory"><i class="fa-solid fa-table-columns me-3"></i>Sub-Category</h5><hr>
                                     <h5 class="menu-item" data-target="checkup"><i class="fa-solid fa-user-tie me-3"></i>Account Checkup</h5><hr>
                                     <h5 class="menu-item" data-target="terms"><i class="fa-solid fa-paperclip me-3"></i></i>Terms of Service</h5><hr>
                                     <h5 class="menu-item" data-target="policy"><i class="fa-solid fa-shield-halved me-3"></i>Privacy Policy</h5><hr>
@@ -173,7 +174,40 @@
                                                     <button type="submit" class="form-control mt-2">Save</button>
                                                 </form>
                                             </div>
-                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
+                                                    @foreach($categories as $val)
+                                                        <p style="margin: 0 0 5px 0;">{{ $val->name }}</p>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="SubCategory" class="detail-section d-none">
+                                        <h4>Create Sub-Category</h4>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form action="{{ url('/create-product-sub-category') }}" method="POST">
+                                                    @csrf
+                                                    <select name="cbxCategory" id="categroy" class="form-control" required>
+                                                        <option selected disabled>-- Select Category --</option>
+                                                        @foreach($categories as $val)
+                                                        <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <input type="text" class="form-control mt-2" name="txtSubCategory" required placeholder="Sub Category name">
+                                                    <button type="submit" class="form-control mt-2">Save</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
+                                                    @foreach($subcategories as $val)
+                                                        <div style="margin-bottom: 6px; font-size: 14px;">
+                                                            <strong>{{ $val->category->name }}</strong> → {{ $val->name }}
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="checkup" class="detail-section d-none">

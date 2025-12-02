@@ -208,6 +208,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/setting', [SettingController::class, 'setting'])->name('setting.view');
     Route::post('/change-password', [SettingController::class, 'changePass']);
     Route::post('/create-product-category', [SettingController::class, 'createCategory']);
+    Route::post('/create-product-sub-category', [SettingController::class, 'createSubCategory']);
 
     Route::get('/permission', [PermissionController::class, 'permission'])->name('user.permission.view');
     Route::get('/user-permission-update', [PermissionController::class, 'permissionUpdate']);
