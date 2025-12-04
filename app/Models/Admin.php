@@ -29,6 +29,8 @@ class Admin extends Authenticatable
         'branch_id',
         'role',
         'status',
+        'otp',
+        'otp_expires_at',
     ];
 
     public function order()

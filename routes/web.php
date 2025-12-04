@@ -36,6 +36,14 @@ Route::get('/login', function() {
 Route::get('/create-new-account', [AdminController::class, 'createAccount'])->name('create.new.account.view');
 Route::post('/create-account', [AdminController::class, 'CreateAccountNew']);
 
+// forget password route
+Route::get('/find-account', [AdminController::class, 'findAccount'])->name('forget-password-find-account');
+Route::get('/find-account-by-email', [AdminController::class, 'findAccountEmail']);
+Route::get('/otp-form', [AdminController::class, 'otpForm'])->name('otp.form');
+Route::get('/match-otp', [AdminController::class, 'verifyOtp']);
+Route::get('/new-password', [AdminController::class, 'newPassword'])->name('new.password.form');
+Route::post('/set-new-password', [AdminController::class, 'updateNewPassword']);
+
 Route::group(['middleware' => ['admin']], function() {
 
     Route::get('/', [DashboardController::class, 'index']);

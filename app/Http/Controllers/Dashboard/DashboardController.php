@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
         $totalProduct = Product::count();
         $active = Product::where('availability', 1)->count();
-        $deactive = Product::where('availability', 2)->count();
+        $deactive = Product::where('availability', 0)->count();
 
         $expiredSoon = Product::whereBetween('expired', [$today, $last3day])->count();
         $expired = Product::where('expired', '<=', Carbon::today())->count();

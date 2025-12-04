@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 use Auth;
 use Session;
 use App\Models\Admin;
 use App\Models\Branch;
+use App\Mail\OtpMail; 
+use Mail;
 
 class AdminController extends Controller
 {
@@ -152,6 +155,92 @@ class AdminController extends Controller
         $user->role = $request->input('role_id', '');
         $user->update();
         return redirect()->back()->with('success', 'Permission updated successfully.');
+    }
+
+    public function findAccount(){
+        return view('auth.find-account');
+    }
+
+    public function findAccountEmail(Request $request){
+        $request->validate([
+            'txtEmail' => 'required|email',
+        ]);
+
+        $email = $request->txtEmail;
+
+        $admin = Admin::where('email', $email)->first();
+        if(empty($admin)){
+            return redirect()->back()->with('error', '❌ User not found. Please try again!');
+        }
+
+        // Generate 6 digit OTP
+        $otp = rand(100000, 999999);
+        $admin->otp = $otp;
+        $admin->otp_expires_at = Carbon::now()->addMinutes(10);
+        $admin->save();
+
+        // Send OTP Mail
+        Mail::to($email)->send(new OtpMail($otp));
+
+        session(['reset_email' => $email]);
+
+        return redirect()->route('otp.form')->with('success', 'OTP sent to your email!');
+    }
+
+    public function otpForm(){
+        return view('auth.otp');
+    }
+
+    public function verifyOtp(Request $request)    {
+        $request->validate([
+            'otp' => 'required|digits:6',
+        ]);
+
+        $email = session('reset_email');
+
+        $admin = Admin::where('email', $email)->first();
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Invalid request!');
+        }
+
+        if ($admin->otp != $request->otp) {
+            return redirect()->back()->with('error', '❌ Invalid OTP!');
+        }
+
+        if (now()->gt($admin->otp_expires_at)) {
+            return redirect()->back()->with('error', '⏰ OTP Expired!');
+        }
+
+        return redirect()->route('new.password.form');
+    }
+
+    public function newPassword(){
+        return view('auth.new-password');
+    }
+
+    public function updateNewPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $email = session('reset_email');
+
+        $admin = Admin::where('email', $email)->first();
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+
+        $admin->password = Hash::make($request->password);
+        $admin->otp = null;
+        $admin->otp_expires_at = null;
+        $admin->save();
+
+        session()->forget('reset_email');
+
+        return redirect('/login')->with('success', 'Password reset successful!');
     }
 
 }
