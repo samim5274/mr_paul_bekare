@@ -48,7 +48,7 @@
               @csrf
               <div class="form-group mb-3">
                 <label class="form-label">Enter your email address</label>
-                <input type="email" name="txtEmail" class="form-control" placeholder="Enter your email address" value="cse.shamim.cub@gmail.com">
+                <input type="email" name="txtEmail" class="form-control" placeholder="Enter your email address">
               </div>
               <div class="d-grid mt-4">
                 <button type="submit" class="btn btn-primary">Find</button>

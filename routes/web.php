@@ -27,11 +27,8 @@ use App\Http\Controllers\Expired\ExpiredController;
 
 Auth::routes();
 
+Route::get('/login', [AdminController::class, 'login'])->name('login-and-logout-view');
 Route::post('/user-login', [AdminController::class, 'userLogin']);
-
-Route::get('/login', function() {
-    return view('auth.login');
-});
 
 Route::get('/create-new-account', [AdminController::class, 'createAccount'])->name('create.new.account.view');
 Route::post('/create-account', [AdminController::class, 'CreateAccountNew']);

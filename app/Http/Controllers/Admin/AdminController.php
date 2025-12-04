@@ -16,6 +16,13 @@ use Mail;
 
 class AdminController extends Controller
 {
+    public function login(){
+        Auth::guard('admin')->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return view('auth.login');
+    }
+
     public function userLogin(Request $request)
     {
         $request->validate([
