@@ -264,7 +264,7 @@ class ProductController extends Controller
     }
 
     public function productStockIn(){
-        $products = Product::paginate(20);       
+        $products = Product::where('availability', 1)->get();
         return view('product.stock.stockIn', compact('products'));
     }
 }

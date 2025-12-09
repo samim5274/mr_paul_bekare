@@ -99,7 +99,7 @@
                         <input type="search" name="search" id="search" class="form-control" placeholder="Search by food name or Id or scan product ber code . . .">
                     </div>
                 </div> 
-                <div class="table-responsive">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
                     <table class="table table-bordered table-striped ">
                         <thead class="table-dark">
                             <tr>
@@ -153,11 +153,11 @@
 
                     </table>
                 </div>
-                <div class="d-flex justify-content-end mt-3">
+                <!-- <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        {{ $products->links() }}
+                        <p>pagination</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div> 
