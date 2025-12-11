@@ -157,6 +157,11 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/branch', [BranchController::class, 'branch'])->name('branch.view');
     Route::post('/add-branch', [BranchController::class, 'addBranch']);
     Route::get('/update-branch/{id}', [BranchController::class, 'updateBranch']);
+    Route::get('/branch-transfer', [BranchController::class, 'branchTransfer']);
+    Route::get('/branch/transfer/product', [BranchController::class, 'serchBranchTransfer']);
+    Route::post('/branch-to-branch-transfer/{product_id}', [BranchController::class, 'transferProduct']);
+    Route::get('/branch-transfer-report', [BranchController::class, 'transferReport']);
+    Route::post('/search-transfer-stock', [BranchController::class, 'filterTransterStock']);
 
     Route::get('/purchase', [PurchaseController::class, 'purchaseView'])->name('purchase.view');
     Route::get('/make-purchase-order', [PurchaseController::class, 'purchaseCart']);

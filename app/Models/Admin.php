@@ -81,4 +81,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(PurchaseReturn::class, 'user_id', 'id');
     }
+
+    public function branchTransfers()
+    {
+        return $this->hasMany(BranchTransfer::class, 'user_id');
+    }
 }

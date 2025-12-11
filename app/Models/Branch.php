@@ -35,4 +35,10 @@ class Branch extends Model
     public function admins(){
         return $this->hasMany(Admin::class, 'branch_id', 'id');
     }
+
+    public function transfers()
+    {
+        return $this->hasMany(BranchTransfer::class, 'branch_id');
+    }
+
 }

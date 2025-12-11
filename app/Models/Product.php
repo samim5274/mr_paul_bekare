@@ -74,5 +74,11 @@ class Product extends Model
     {
         return $this->hasMany(FactoryStock::class);
     }
+
+    public function branchTransfers()
+    {
+        return $this->hasMany(BranchTransfer::class, 'product_id');
+    }
+
     
 }
